@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Images</title>
+</head>
+<body>
+    <h1>Three Beautiful Images</h1>
+    <div class="image-container">
+        <img src="image1.jpg" alt="Image 1" id="image1" width="400" height="400">
+        <img src="image2.jpg" alt="Image 1" id="image2" width="400" height="400">
+        <img src="image3.jpg" alt="Image 1" id="image3" width="400" height="400">
+    </div>    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+    const animation = [
+        { transform: 'rotate(0) scale(1)' },
+        { transform: 'rotate(360deg) scale(1.5)' },
+        { transform: 'rotate(0) scale(1)' }
+    ];
+
+    const animationConfig = {
+        duration: 2000,
+        iterations: 1,
+        fill: 'forwards'
+    };
+
+    const images = document.querySelectorAll(".image-container img");
+
+    const animateImage = (image) => {
+        return new Promise((resolve) => {
+            const animation = image.animate([
+                { transform: 'rotate(0) scale(1)' },
+                { transform: 'rotate(360deg) scale(1.5)' },
+                { transform: 'rotate(0) scale(1)' }
+            ], animationConfig);
+
+            animation.onfinish = resolve;
+        });
+    };
+
+    for (const image of images) {
+        await animateImage(image);
+    }
+});
+
+
+    </script>
+</body>
+</html>
